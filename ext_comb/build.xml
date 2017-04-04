@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<project name="ext_comb" default="info" basedir="./">
+	<!-- system properties -->
+	<property file="build.properties" />
+
+	<!-- class path for building the project -->
+	<path id="build.class.path" >
+		<fileset dir="${repository}/">
+			<include name="*.jar" />
+			<include name="*.zip" />
+			<include name="**/*.jar" />
+			<include name="**/**/*.jar" />
+		</fileset>
+		<fileset dir="${development}/">
+			<include name="*.jar" />
+			<include name="*.zip" />
+		</fileset>
+	</path>
+	
+	<tstamp>
+	       <format property="touch.time" pattern="yyyy-MM-dd hh:mm:ss" />
+      </tstamp>
+
+	<!-- info -->
+	<target name="info" description="info信息">
+		<echo message="build comb..." />
+	</target>
+
+	<target name="build-clean">
+		<delete dir="${dist}" />
+	</target>
+
+	<target name="build-prepare" description="创建build和dist目录">
+		<mkdir dir="${dist}" />
+	</target>
+
+	<!-- entry -->
+	<target name="release">
+		<antcall target="build-clean" />
+		<antcall target="build-prepare" />
+		<antcall target="jar-makeSrcJar" />
+	</target>
+	
+	<!-- 编译src -->
+	<target name="jar-compileSrc" >
+		<delete dir="${srcclasses}" />
+		<mkdir dir="${srcclasses}" />
+		<javac destdir="${srcclasses}" target="${dest.version}" source="${src.version}" includeantruntime="false" debug="${debugsw}" optimize="${optsw}" verbose="no" deprecation="${depsw}" encoding="UTF-8">
+			<src path="${src}" />
+			<classpath refid="build.class.path" />
+		</javac>
+		<copy todir="${srcclasses}">
+			<fileset dir="${src}">
+				<include name="*.properties" />
+				<include name="**/*.properties" />
+				<include name="**/*.db" />
+				<include name="**/*.dat" />
+				<exclude name="**/*.txt" />
+			</fileset>
+		</copy>
+	</target>
+	
+	<target name="jar-makeSrcJar" depends="jar-compileSrc" >
+		<jar jarfile="${dist}/hadoop-ext.jar">
+			<fileset dir="${srcclasses}">
+				<exclude name="log4j.properties" />
+				<exclude name="com/hadoop/Test*" />
+			</fileset>
+			<manifest>
+				<attribute name="Built-By" value="${built-by}" />
+				<attribute name="Plat-Version" value="${version}" />
+				<attribute name="Built-Java-Version" value="${dest.version}" />
+				<attribute name="Built-Time" value="${touch.time}"/>
+			</manifest>
+		</jar>
+	</target>
+</project>
