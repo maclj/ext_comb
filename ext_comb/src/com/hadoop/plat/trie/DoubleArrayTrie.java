@@ -20,12 +20,7 @@ import java.util.List;
  * 构造过程耗时：双数组（DoubleArrayTrie）>二分法（ansj）>基数法（patricia-trie）<br>
  * 查询过程耗时：基数法（patricia-trie）>二分法（ansj）>双数组（DoubleArrayTrie）<br>
  * 
- * 由于构造都是一次性的，这里选用了DoubleArrayTrie实现。<br>
- * 
- * 内存消耗与实际存储的二进制文件差不多，是源文本文件的2.5倍左右。<br>
- * 
- * 使用方式：<br>
- * 
+ * 使用方式：<br> * 
  * List<String> words = ...;  <br>
  * DoubleArrayTrie trie = new DoubleArrayTrie();<br>
  * trie.build(words);<br>
