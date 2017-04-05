@@ -1,11 +1,11 @@
-# ext_comb：Hadoop多项目合并
+# ext_comb：merges function to run
 <br>
-此项目主要针对目前项目开发的常见需求：合并且同时运行多个基于相同数据源（数据格式）的程序。<br>
-同时，采用annotation定义Job以简化代码，并使命令行配置优先于程序定义以便在运行期间进行参数的变更。<br>
+This project focuses on the common needs of development: merging and running multiple functions based on the same data source (data format) at the same time.At the same time, annotations are used to define the Job to simplify the code and make the command line configuration take precedence over the program definition to make changes to the parameters during runtime.
+<br>
 
 
 
-## 运行脚本样例：<br>
+## Script sample：<br>
 hadoop jar hadoop-ext.jar com.hadoop.entry.Main \
 -libjars your.jar \
 -D mapreduce.input.fileinputformat.split.minsize=1 \
@@ -16,7 +16,7 @@ hadoop jar hadoop-ext.jar com.hadoop.entry.Main \
 -o /output/ \
 -d 2017-04-01
 
-## 运行配置样例：<br>
+## Code sample：<br>
 @JobDefine( \
     project="comb", \
     inputPath = "input", \
