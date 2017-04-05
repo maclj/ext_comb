@@ -1,6 +1,7 @@
 # ext_comb：merges function to run
 <br>
-This project focuses on the common needs of development: merging and running multiple functions based on the same data source (data format) at the same time.At the same time, annotations are used to define the Job to simplify the code and make the command line configuration take precedence over the program definition to make changes to the parameters during runtime.
+This project focuses on the common needs of development: merging and running multiple functions based on the same data source (data format) at the same time.<br>
+Annotations are used to define the Job to simplify the code and make the command line configuration take precedence over the program definition to make changes to the parameters during runtime.
 <br>
 
 
